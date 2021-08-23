@@ -3,7 +3,7 @@
 int main()
 {
     int at[10] = {0}, st[10] = {0}, ft[10] = {0}, tat[10] = {0}, wt[10] = {0};
-    float totalTAT, totalWT;
+    float totalTAT = 0, totalWT = 0;
     int sum = 0, n;
 
     printf("Number of job: ");
@@ -45,6 +45,6 @@ int main()
         printf("Job %d \t %d \t\t %d \t\t %d \t\t\t %d \t\t %d \n", i+1, at[i], st[i], ft[i], tat[i], wt[i]);
     }
 
-    printf("total turn around time %d", totalTAT);
-    printf("total waiting time %d", totalWT);
+    printf("Average turn around time %f\n", totalTAT / n);
+    printf("Average waiting time %f\n", totalWT / n);
 }
