@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-void bubbleSort(int array[], int size, int job[], int at[]) 
+void bubbleSort(int array[], int size, int job[]) 
 {
     for (int step = 0; step < size - 1; ++step) 
     {
@@ -13,15 +13,10 @@ void bubbleSort(int array[], int size, int job[], int at[])
                 array[i] = array[i + 1];
                 array[i + 1] = temp;
 
-                // Interchanging the arrival Time
-                int atTemp = at[i + 1];
-                at[i + 1] = at[i + 2];
-                at[i + 2] = atTemp;
-
                 // Interchanging the job Number
-                int jobTemp = job[i + 1];
-                job[i + 1] = job[i + 2];
-                job[i + 2] = jobTemp;
+                int jobTemp = job[i];
+                job[i] = job[i + 1];
+                job[i + 1] = jobTemp;
             }
         }
     }
@@ -29,7 +24,7 @@ void bubbleSort(int array[], int size, int job[], int at[])
 
 int main()
 {
-    int job[10] = {0}, at[10] = {0}, st[10] = {0}, ft[10] = {0}, tat[10] = {0}, wt[10] = {0}, ra[10] = {0};
+    int job[10] = {0}, at[10] = {0}, st[10] = {0}, ft[10] = {0}, tat[10] = {0}, wt[10] = {0}, priority[10] = {0};
     float totalTAT = 0, totalWT  = 0;
     int sum = 0, n;
 
@@ -38,34 +33,22 @@ int main()
 
     job[n];
 
-    // Scanning Arrival time and Service time
+    // Scanning Service time and priority time
     for (int i = 0; i < n; i++)
     {
         job[i] = i + 1;
 
-        printf("Arrival time for job[%d]: ", i + 1);
-        scanf("%d", &at[i]);
-
         printf("Service time for job[%d]: " , i + 1);
         scanf("%d", &st[i]);
+
+        printf("Priority for job[%d]: ", i + 1);
+        scanf("%d", &priority[i]);
 
         printf("\n");
     }
 
-    // Copying Service Time to random array
-    for (int i = 0; i < n - 1; i++)
-    {
-        ra[i] = st[i + 1];
-    }
-
     // Sorting the Service Time as random array without index 1
-    bubbleSort(ra, n - 1, job, at); // function to sort the service tiem and interchanging the job number and arrival time
-
-    //Copying random array to service time from index 1
-    for (int i = 1; i < n; i++)
-    {
-        st[i] = ra[i - 1];
-    }
+    bubbleSort(st, n, job); // function to sort the service tiem and interchanging the job number
 
     //Calculating Finish Time
     sum = sum + at[0];
